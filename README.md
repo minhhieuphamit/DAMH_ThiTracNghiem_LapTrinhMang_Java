@@ -6,4 +6,6 @@
 * Run Client: formClient.java
 * Địa chỉ: localhost - Cổng port: 1433 - Servername: localhost:1433 - Username: sa - Password: 123 
 * Tìm hiểu cách thay đổi cổng port cho SQL Server 
-* Thông tin liên hệ: Email: minhhieupham2002@gmail.com hoặc Facebook: fb.com/minhhieupham.it
+* Thông tin liên hệ: 
+  - Email: minhhieupham2002@gmail.com
+  - Facebook: fb.com/minhhieupham.it

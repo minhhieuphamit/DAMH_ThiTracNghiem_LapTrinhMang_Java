@@ -4,11 +4,14 @@
  */
 package Client;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.URL;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -27,6 +30,9 @@ public class formClient extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("THI TRẮC NGHIỆM");
+        URL urlIcon = formClient.class.getResource("icon.png");
+        Image img = Toolkit.getDefaultToolkit().createImage(urlIcon);
+        this.setIconImage(img);
     }
 
     /**

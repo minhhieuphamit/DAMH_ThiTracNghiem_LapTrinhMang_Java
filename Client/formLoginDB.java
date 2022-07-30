@@ -4,12 +4,14 @@
  */
 package Client;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.net.Socket;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.io.*;
-import java.util.*;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,6 +28,9 @@ public class formLoginDB extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("THI TRẮC NGHIỆM");
+        URL urlIcon = formClient.class.getResource("icon.png");
+        Image img = Toolkit.getDefaultToolkit().createImage(urlIcon);
+        this.setIconImage(img);
     }
 
     /**

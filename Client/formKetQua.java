@@ -7,6 +7,9 @@ package Client;
 import Server.ConnectDB;
 import Server.DapAn;
 import Server.ThongTinSV;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JFrame;
@@ -28,14 +31,19 @@ public class formKetQua extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setTitle("THI TRẮC NGHIỆM");
+        URL urlIcon = formClient.class.getResource("icon.png");
+        Image img = Toolkit.getDefaultToolkit().createImage(urlIcon);
+        this.setIconImage(img);
         String s = String.valueOf(DapAn.diem);
         jLabelDiem.setText("ĐIỂM CỦA BẠN : " + s);
         jLabelHoTen.setText("Họ và tên: " + ThongTinSV.hoTen);
         jLabelMSSV.setText("Mã số sinh viên: " + ThongTinSV.mssv);
-        ConnectDB.updateCore(ThongTinSV.mssv, DapAn.diem, now.toString());
         jLabelSDT.setText("Số điện thoại: " + ThongTinSV.sdt);
         jLabelNgayThi.setText("Ngày thi: " + formatNgayThi);
         jLabelCauDung.setText("SỐ CÂU ĐÚNG : " + s + "/10");
+
+        ConnectDB.updateCore(ThongTinSV.mssv, DapAn.diem, now.toString());
+
     }
 
     /**

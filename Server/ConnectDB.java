@@ -55,7 +55,7 @@ public class ConnectDB {
     public static boolean insertThongTin(String s, String s1, String s2) {
         boolean check = false;
         Connection conn = getConnection();
-        String sql = "INSERT INTO SINHVIEN(MASV,HOTEN,SODIENTHOAI) VALUES('" + s + "','" + s1 + "','" + s2 + "')";
+        String sql = "INSERT INTO SINHVIEN(MASV,HOTEN,SODIENTHOAI) VALUES('" + s1 + "','" + s + "','" + s2 + "')";
         try {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(sql);
@@ -126,8 +126,5 @@ public class ConnectDB {
             Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return check;
-    }
-
-    public static void main(String[] args) {
     }
 }

@@ -169,6 +169,12 @@ public class formThongTin extends javax.swing.JFrame {
 
     private void jButtonGuiThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuiThongTinActionPerformed
         // TODO add your handling code here:
+        if (jTextFieldHoTen.getText().equals("") || jTextFieldMSSV.getText().equals("") || jTextFieldSDT.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "VUI LÒNG ĐIỀN ĐẦY ĐỦ THÔNG TIN!!");
+            jTextFieldHoTen.requestFocus();
+            return;
+        }
+        
         String thongTin = "";
 
         thongTin += jTextFieldHoTen.getText();

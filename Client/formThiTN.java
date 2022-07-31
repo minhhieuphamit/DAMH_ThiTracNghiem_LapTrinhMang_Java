@@ -10,10 +10,13 @@ import Server.DapAn;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -29,7 +32,6 @@ public final class formThiTN extends javax.swing.JFrame {
     Socket socket;
     DataInputStream dis;
     DataOutputStream dos;
-    //ButtonGroup G = new ButtonGroup();
     int soCau = 0;
     String strkq;
     String anw;
@@ -50,12 +52,14 @@ public final class formThiTN extends javax.swing.JFrame {
             initComponents();
             this.setLocationRelativeTo(null);
             this.setTitle("THI TRẮC NGHIỆM");
-
             listCauhoi = new ArrayList();
             cauChon = new ArrayList();
             ketqua = new ArrayList<>();
             ThiTracNghiem();
             cauHoiKeTiep();
+            URL urlIcon = formClient.class.getResource("icon.png");
+            Image img = Toolkit.getDefaultToolkit().createImage(urlIcon);
+            this.setIconImage(img);
         } catch (IOException | InterruptedException ex) {
             Logger.getLogger(formThiTN.class.getName()).log(Level.SEVERE, null, ex);
         }

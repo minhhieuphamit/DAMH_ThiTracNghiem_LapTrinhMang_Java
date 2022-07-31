@@ -181,7 +181,6 @@ public final class formThiTN extends javax.swing.JFrame {
 
     public void ThiTracNghiem() {
         try {
-
             socket = new Socket("localhost", 10000);
             dis = new DataInputStream(socket.getInputStream());
             dos = new DataOutputStream(socket.getOutputStream());
@@ -196,15 +195,15 @@ public final class formThiTN extends javax.swing.JFrame {
                 if (dem < 11) {
                     CH = new CauHoi();
                     CH.setCauHoi(Integer.parseInt(arrStr[i]));
-                    CH.setTrinhDo(arrStr[i + 1]);
-                    CH.setNoiDung(arrStr[i + 2]);
-                    CH.setCauA(arrStr[i + 3]);
-                    CH.setCauB(arrStr[i + 4]);
-                    CH.setCauC(arrStr[i + 5]);
-                    CH.setCauD(arrStr[i + 6]);
-                    CH.setDapAn(arrStr[i + 7]);
+//                    CH.setTrinhDo(arrStr[i + 1]);
+                    CH.setNoiDung(arrStr[i + 1]);
+                    CH.setCauA(arrStr[i + 2]);
+                    CH.setCauB(arrStr[i + 3]);
+                    CH.setCauC(arrStr[i + 4]);
+                    CH.setCauD(arrStr[i + 5]);
+                    CH.setDapAn(arrStr[i + 6]);
                     listCauhoi.add(CH);
-                    i = i + 8;
+                    i = i + 7;
                 }
                 dem++;
             }

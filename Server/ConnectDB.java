@@ -75,7 +75,7 @@ public class ConnectDB {
         Random rand = new Random();
         int dem = 0;
         while (dem < 10) {
-            int k = rand.nextInt(220);
+            int k = rand.nextInt(32);
             if (socau[k] != 1) {
                 socau[k] = 1;
                 dem++;
@@ -91,8 +91,8 @@ public class ConnectDB {
                 if (socau[dem] > 0) {
                     str += rs.getString("CAUHOI");
                     str += "///";
-                    str += rs.getString("TRINHDO");
-                    str += "///";
+//                    str += rs.getString("TRINHDO");
+//                    str += "///";
                     str += rs.getString("NOIDUNG");
                     str += "///";
                     str += rs.getString("A");

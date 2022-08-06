@@ -17,7 +17,7 @@
 * Initialize the database from the file THITRACHIEM.sql
 * Run Server: Server.java
 * Run Client: formClient.java
-* Address: localhost - Port port: 1433 - Servername: localhost:1433 - Username: sa - Password: 123
+* Address: localhost - Port: 1433 - Servername: localhost:1433 - Username: sa - Password: 123
 * Learn how to change the port for SQL Server
 * Contact Info:
   - Email: minhhieupham2002@gmail.com

@@ -54,22 +54,20 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jLabel1" pref="221" max="32767" attributes="0"/>
-                      <Component id="jLabelHoTen" max="32767" attributes="0"/>
-                      <Component id="jLabelMSSV" max="32767" attributes="0"/>
-                      <Component id="jLabelSDT" max="32767" attributes="0"/>
-                      <Component id="jLabelNgayThi" max="32767" attributes="0"/>
-                      <Component id="jLabelDiem" max="32767" attributes="0"/>
-                      <Component id="jLabelCauDung" max="32767" attributes="0"/>
+                  <EmptySpace pref="289" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel1" pref="221" max="32767" attributes="0"/>
+                          <Component id="jLabelHoTen" max="32767" attributes="0"/>
+                          <Component id="jLabelMSSV" max="32767" attributes="0"/>
+                          <Component id="jLabelSDT" max="32767" attributes="0"/>
+                          <Component id="jLabelNgayThi" max="32767" attributes="0"/>
+                          <Component id="jLabelDiem" max="32767" attributes="0"/>
+                          <Component id="jLabelCauDung" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="jButtonThoat" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace pref="360" max="32767" attributes="0"/>
-                  <Component id="jButtonThoat" min="-2" pref="80" max="-2" attributes="0"/>
-                  <EmptySpace pref="360" max="32767" attributes="0"/>
+                  <EmptySpace pref="290" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

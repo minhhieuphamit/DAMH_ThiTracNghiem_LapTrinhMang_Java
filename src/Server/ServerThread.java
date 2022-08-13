@@ -4,6 +4,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,6 +12,7 @@ import java.util.logging.Logger;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
 /**
  * @author Pham Minh Hieu
  */
@@ -26,25 +28,6 @@ public class ServerThread implements Runnable {
         new Thread(this).start();
     }
 
-    public static final int loginServer = 1;
-    public static final int loginDatabase = 2;
-    public static final int insertThongTin = 3;
-    public static final int thiTracNghiem = 4;
-
-    public int flag(String str) {
-        if (str.equals("1")) {
-            return loginServer;
-        } else if (str.equals("2")) {
-            return loginDatabase;
-        } else if (str.equals("3")) {
-            return insertThongTin;
-        } else if (str.equals("4")) {
-            return thiTracNghiem;
-        } else {
-            return -1;
-        }
-    }
-
     @Override
     public void run() {
         try {
@@ -52,9 +35,9 @@ public class ServerThread implements Runnable {
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
             String receive = dis.readUTF();
             String receiveArray[] = receive.split("///");
-            int flag = flag(receiveArray[0]);
-            switch (flag) {
-                case loginServer:
+            //int flag = flag(receiveArray[0]);
+            switch (Integer.parseInt(receiveArray[0])) {
+                case 1:
                     if (receiveArray[1].equals("localhost") && receiveArray[2].equals("1433")) {
                         System.out.println("Arrdress: " + receiveArray[1] + "\nPort: " + receiveArray[2]);
                         dos.writeUTF("Connected");
@@ -62,28 +45,44 @@ public class ServerThread implements Runnable {
                         dos.writeUTF("Connected fail");
                     }
                     break;
-                case loginDatabase:
+                case 2:
                     System.out.print(receive);
-                    //nếu đăng nhập thành công thì gửi thông báo kết nối thành công
                     if (ConnectDB.getConnect(receive) == true) {
                         dos.writeUTF("Connected");
                     } else {
                         dos.writeUTF("Connected fail");
                     }
                     break;
-                case insertThongTin:
+                case 3:
                     String[] arrStr = receive.split("///");
                     System.out.println("Ho ten: " + arrStr[1] + "\nMSSV: " + arrStr[2] + "" + "\nSDT: " + arrStr[3]);
-                    if (ConnectDB.insertThongTin(receiveArray[1], receiveArray[2], receiveArray[3])) {
+                    if (ConnectDB.insertThongTin(receiveArray[1], receiveArray[2], receiveArray[3]) == true) {
                         dos.writeUTF("Success");
                     } else {
                         dos.writeUTF("Connected fail");
                     }
                     break;
-                case thiTracNghiem:
-                    System.out.println("Có Client đang thi trắc nghiệm");
+                case 4:
+                    System.out.println("Có Client đang thi trắc nghiệm...");
                     String strCauHoi = ConnectDB.getAllCauHoi();
+                    String arrCauHoi[] = strCauHoi.split("///");
                     dos.writeUTF(strCauHoi);
+                    String receiveAnswer = dis.readUTF();
+                    System.out.println("Client đã trả lời: " + receiveAnswer);
+                    String arrAnswer[] = receiveAnswer.split("///");
+                    int cauDung = 0;
+                    ArrayList<String> Answer = new ArrayList<>();
+                    for (int i = 0; i < arrCauHoi.length; i += 7) {
+                        Answer.add(arrCauHoi[i + 6]);
+                    }
+                    System.out.println(Answer);
+                    for (int i = 0; i < arrAnswer.length; i++) {
+                        if (Answer.get(i).equals(arrAnswer[i])) {
+                            cauDung++;
+                        }
+                    }
+                    System.out.println("Số câu đúng: " + cauDung);
+                    dos.writeUTF(String.valueOf(cauDung));
                     break;
             }
         } catch (IOException ex) {

@@ -32,7 +32,7 @@ public class ConnectDB {
         boolean check = false;
         Connection conn = null;
         String[] arrStr = str.split("///");
-        System.out.println("\nServername: " + arrStr[1] +"\nUsername: "+ arrStr[2] +"\nPassword: " + arrStr[3]);
+        System.out.println("\nServername: " + arrStr[1] + "\nUsername: " + arrStr[2] + "\nPassword: " + arrStr[3]);
         String ServerName = arrStr[1];
         String name = arrStr[2];
         String pass = arrStr[3];
@@ -65,8 +65,7 @@ public class ConnectDB {
     }
 
     public static String getAllCauHoi() {
-        List<CauHoi> listCH = new ArrayList<CauHoi>();
-        int[] soCau = new int[1000];
+        int[] soCau = new int[40];
         Arrays.fill(soCau, 0);
         Connection conn = getConnection();
         String sql = "SELECT * FROM BODE";
@@ -109,17 +108,18 @@ public class ConnectDB {
         return str;
     }
 
-    public static boolean updateCore(String mssv, int diem, String ngayThi) {
-        boolean check = false;
+    public static void updateCore(String mssv, int diem, String ngayThi) {
         Connection conn = getConnection();
         String sql = "UPDATE SINHVIEN SET DIEM = '" + diem + "', NGAYTHI = '" + ngayThi + "' WHERE MASV LIKE '" + mssv + "'";
         try {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(sql);
-            check = true;
         } catch (SQLException ex) {
             Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return check;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getAllCauHoi());
     }
 }

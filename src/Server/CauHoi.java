@@ -5,20 +5,18 @@
 package Server;
 
 /**
- *
  * @author Pham Minh Hieu
  */
 public class CauHoi {
 
     private int cauHoi;
-    private String trinhDo, noiDung, CauA, CauB, CauC, CauD, dapAn;
+    private String noiDung, CauA, CauB, CauC, CauD, dapAn;
 
     public CauHoi() {
     }
 
-    public CauHoi(int cauHoi, String trinhDo, String noiDung, String CauA, String CauB, String CauC, String CauD, String dapAn) {
+    public CauHoi(int cauHoi, String noiDung, String CauA, String CauB, String CauC, String CauD, String dapAn) {
         this.cauHoi = cauHoi;
-        this.trinhDo = trinhDo;
         this.noiDung = noiDung;
         this.CauA = CauA;
         this.CauB = CauB;
@@ -33,14 +31,6 @@ public class CauHoi {
 
     public void setCauHoi(int cauHoi) {
         this.cauHoi = cauHoi;
-    }
-
-    public String getTrinhDo() {
-        return trinhDo;
-    }
-
-    public void setTrinhDo(String trinhDo) {
-        this.trinhDo = trinhDo;
     }
 
     public String getNoiDung() {
@@ -81,13 +71,5 @@ public class CauHoi {
 
     public void setCauD(String CauD) {
         this.CauD = CauD;
-    }
-
-    public String getDapAn() {
-        return dapAn;
-    }
-
-    public void setDapAn(String dapAn) {
-        this.dapAn = dapAn;
     }
 }

@@ -5,7 +5,6 @@
 package Server;
 
 /**
- *
  * @author Pham Minh Hieu
  */
 public class ThongTinSV {

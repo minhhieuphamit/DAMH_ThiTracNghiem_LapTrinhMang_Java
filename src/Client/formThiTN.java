@@ -5,7 +5,8 @@
 package Client;
 
 import Server.CauHoi;
-import Server.DapAn;
+import Server.KetQua;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.DataInputStream;
@@ -37,21 +38,15 @@ public final class formThiTN extends javax.swing.JFrame {
      * Creates new form formThiTracNghiem
      */
     public formThiTN() {
-        try {
-            initComponents();
-            this.setLocationRelativeTo(null);
-            this.setTitle("THI TRẮC NGHIỆM");
-            listCauhoi = new ArrayList();
-            cauChon = new ArrayList();
-            new ArrayList();
-            ThiTracNghiem();
-            cauHoiKeTiep();
-            URL urlIcon = formClient.class.getResource("icon.png");
-            Image img = Toolkit.getDefaultToolkit().createImage(urlIcon);
-            this.setIconImage(img);
-        } catch (IOException | InterruptedException ex) {
-            Logger.getLogger(formThiTN.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setTitle("THI TRẮC NGHIỆM");
+        listCauhoi = new ArrayList();
+        cauChon = new ArrayList();
+        ThiTracNghiem();
+        URL urlIcon = formClient.class.getResource("icon.png");
+        Image img = Toolkit.getDefaultToolkit().createImage(urlIcon);
+        this.setIconImage(img);
     }
 
     @Override
@@ -62,12 +57,10 @@ public final class formThiTN extends javax.swing.JFrame {
         g.setFont(new Font("Tahoma", Font.BOLD, 21));
 
         if (timer > 0) {
-            g.drawString(time, 10, 100);
-
+            g.drawString(time, 30, 80);
         } else {
-            g.drawString("Times up ", 10, 100);
-
-            timer = 30;
+            g.drawString("Times up", 30, 80);
+            timer = 31;
             try {
                 try {
                     cauHoiKeTiep();
@@ -82,18 +75,14 @@ public final class formThiTN extends javax.swing.JFrame {
         try {
             Thread.sleep(1000);
             repaint();
-        } catch (Exception e) {
-            if (timer < 0) {
-                current++;
-                timer = 30;
-            }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(formThiTN.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     private void cauHoiKeTiep() throws IOException, InterruptedException {
-        current++;
         timer = 30;
-
+        current++;
         if (current > 0) {
             if (jRadioButtonCauA.isSelected()) {
                 cauChon.add("A");
@@ -126,35 +115,25 @@ public final class formThiTN extends javax.swing.JFrame {
             jRadioButtonCauC.setText("C. " + CH.getCauC());
             System.out.println("D. " + CH.getCauD());
             jRadioButtonCauD.setText("D. " + CH.getCauD());
-            if (dem == 10) {
+            if (dem == soCau) {
                 jButtonTiepTheo.setText("NỘP BÀI");
             }
         } else {
+            String send = "";
+            for (int i = 0; i < cauChon.size(); i++) {
+                send += cauChon.get(i) + "///";
+            }
+            dos.writeUTF(send);
+            String diem = dis.readUTF();
+            System.out.println("Điểm của bạn là: " + diem);
+            KetQua.diem = diem;
+            KetQua.soCauDung = diem;
             JOptionPane.showMessageDialog(null, "Bạn đã hoàn thành bài thi!! Nộp bài!");
-            tinhSoCauDung();
             this.setVisible(false);
             formKetQua KQ = new formKetQua();
             KQ.setVisible(true);
+            socket.close();
         }
-    }
-
-    private void tinhSoCauDung() {
-        int cauDung = 0;
-        dem = 0;
-        System.out.println("So sánh dáp án");
-        for (int i = 0; i < soCau; i++) {
-            dem++;
-            String dapAn = listCauhoi.get(i).getDapAn();
-            String chon = (String) cauChon.get(i);
-            System.out.println("Câu " + dem + ". Ðáp án của bạn chọn - Ðáp án hệ thống: " + dapAn + "--" + chon);
-            if (chon.equals(dapAn)) {
-                System.out.println("Đúng\n");
-                cauDung++;
-            } else {
-                System.out.println("Sai\n");
-            }
-        }
-        DapAn.diem = cauDung;
     }
 
     public void ThiTracNghiem() {
@@ -164,31 +143,29 @@ public final class formThiTN extends javax.swing.JFrame {
             dos = new DataOutputStream(socket.getOutputStream());
             String flag = "4";
             dos.writeUTF(flag);
-            dos.flush();
-            CauHoi CH = new CauHoi();
             String receive = dis.readUTF();
             String[] arrStr = receive.split("///");
-            List<CauHoi> listCH = new ArrayList<CauHoi>();
             int i = 0;
             int dem = 0;
             for (i = 0; i < arrStr.length; i += 7) {
-                if (dem < 11) {
-                    CH = new CauHoi();
+                if (dem < 10) {
+                    CauHoi CH = new CauHoi();
                     CH.setCauHoi(Integer.parseInt(arrStr[i]));
                     CH.setNoiDung(arrStr[i + 1]);
                     CH.setCauA(arrStr[i + 2]);
                     CH.setCauB(arrStr[i + 3]);
                     CH.setCauC(arrStr[i + 4]);
                     CH.setCauD(arrStr[i + 5]);
-                    CH.setDapAn(arrStr[i + 6]);
                     listCauhoi.add(CH);
                 }
                 dem++;
             }
             soCau = listCauhoi.size();
-            socket.close();
+            cauHoiKeTiep();
         } catch (IOException ex) {
             Logger.getLogger(formClient.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(formThiTN.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
